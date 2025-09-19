@@ -6,15 +6,15 @@ import api.UserJobResponse;
 import project.annotations.NetworkAPIPrototype;
 
 /**
- * Prototype implementation of UserComputeAPI.
- * Does not run real logic — just accepts and returns a stubbed response.
+ * Prototype implementation of the UserComputeAPI.
+ * Always accepts jobs and returns a stubbed response.
  */
 public class UserComputeAPIPrototype implements UserComputeAPI {
 
     @Override
     @NetworkAPIPrototype
     public UserJobResponse submitJob(UserJobRequest request) {
-        // Always accept the job and return a fake jobId for now
+        // For now, just accept everything and return a fake jobId
         return new ProtoUserJobResponse(true, "proto-123", "Prototype accepted");
     }
 
@@ -35,9 +35,16 @@ public class UserComputeAPIPrototype implements UserComputeAPI {
             this.kvSeparator = kvSeparator;
         }
 
+        @Override
         public String getInputSource() { return inputSource; }
+
+        @Override
         public String getOutputDestination() { return outputDestination; }
+
+        @Override
         public Character getPairSeparator() { return pairSeparator; }
+
+        @Override
         public Character getKvSeparator() { return kvSeparator; }
     }
 
@@ -55,8 +62,13 @@ public class UserComputeAPIPrototype implements UserComputeAPI {
             this.message = message;
         }
 
+        @Override
         public boolean isAccepted() { return accepted; }
-        public String getJobId() { return jobId; }
+
+        @Override
+        public String getJobID() { return jobId; }  // ✅ matches interface exactly
+
+        @Override
         public String getMessage() { return message; }
     }
 }
