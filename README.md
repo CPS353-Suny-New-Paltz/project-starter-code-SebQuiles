@@ -6,12 +6,12 @@ The system will convert the input integer into English words and proper formatti
 
 Example
 
-**Using '=' as the key-value seperator:**
-Input: 21
+**Using '=' as the key-value seperator:**  
+Input: 21  
 Output: '21=twenty-one'
 
-**Using ';' as the pair separator and the '=' as the key-value separator:**
-Input: 6;12;21
+**Using ';' as the pair separator and the '=' as the key-value separator:**  
+Input: 6;12;21  
 Output: '6=six;12=twelve;21=tweny-one'
 
 ![System Diagram API](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-SebQuiles/blob/80a4cf6e5a0e9f669117b5e783dc75afeb9cee0a/Checkpoint2SystemDiagram.jpg?raw=true)
