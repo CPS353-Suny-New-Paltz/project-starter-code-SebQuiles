@@ -20,14 +20,7 @@ public class JobOrchestratorPrototype {
         this.converter = converter;
     }
 
-    /**
-     * Run the job: read integers, convert them, format them, and "write" results.
-     * @param inputSource where to read integers from (fake in prototype)
-     * @param outputDest where to write results (fake in prototype)
-     * @param pairSep separator between input-output pairs
-     * @param kvSep separator between a number and its word
-     * @return formatted result string
-     */
+    // Returns something like "6:six;12:twelve;21:twenty-one"
     public String run(String inputSource, String outputDest, Character pairSep, Character kvSep) throws Exception {
         char p = (pairSep == null) ? ';' : pairSep.charValue();
         char k = (kvSep == null) ? ':' : kvSep.charValue();
@@ -38,8 +31,11 @@ public class JobOrchestratorPrototype {
 
         boolean first = true;
         for (Integer n : ints) {
-            if (!first) sb.append(p);
+            if (!first) {
+                sb.append(p);              
+            }
             first = false;
+
             String words = converter.toWords(n);
             String pair = n + String.valueOf(k) + words;
             sb.append(pair);

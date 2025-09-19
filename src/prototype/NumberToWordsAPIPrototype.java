@@ -13,9 +13,15 @@ public class NumberToWordsAPIPrototype implements NumberToWordsAPI {
     @ConceptualAPIPrototype
     public String toWords(int n) {
         // Simple stubbed logic, not a full converter yet
-        if (n == 6)  return "six";
-        if (n == 12) return "twelve";
-        if (n == 21) return "twenty-one";
+        if (n == 6) {
+            return "six";
+        }
+        if (n == 12) {
+            return "twelve";
+        }
+        if (n == 21) {
+            return "twenty-one";
+        }
         return "prototype-number"; // default placeholder
     }
 }

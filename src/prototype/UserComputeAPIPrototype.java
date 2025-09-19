@@ -28,7 +28,7 @@ public class UserComputeAPIPrototype implements UserComputeAPI {
         private final Character kvSeparator;
 
         public ProtoUserJobRequest(String inputSource, String outputDestination,
-                                   Character pairSeparator, Character kvSeparator) {
+                Character pairSeparator, Character kvSeparator) {
             this.inputSource = inputSource;
             this.outputDestination = outputDestination;
             this.pairSeparator = pairSeparator;
@@ -36,16 +36,24 @@ public class UserComputeAPIPrototype implements UserComputeAPI {
         }
 
         @Override
-        public String getInputSource() { return inputSource; }
+        public String getInputSource() {
+            return inputSource;
+        }
 
         @Override
-        public String getOutputDestination() { return outputDestination; }
+        public String getOutputDestination() {
+            return outputDestination;
+        }
 
         @Override
-        public Character getPairSeparator() { return pairSeparator; }
+        public Character getPairSeparator() {
+            return pairSeparator;
+        }
 
         @Override
-        public Character getKvSeparator() { return kvSeparator; }
+        public Character getKvSeparator() {
+            return kvSeparator;
+        }
     }
 
     /**
@@ -63,12 +71,18 @@ public class UserComputeAPIPrototype implements UserComputeAPI {
         }
 
         @Override
-        public boolean isAccepted() { return accepted; }
+        public boolean isAccepted() {
+            return accepted;
+        }
 
         @Override
-        public String getJobID() { return jobId; }  // ✅ matches interface exactly
+        public String getJobID() {
+            return jobId;
+        }
 
         @Override
-        public String getMessage() { return message; }
+        public String getMessage() {
+            return message;
+        }
     }
 }
