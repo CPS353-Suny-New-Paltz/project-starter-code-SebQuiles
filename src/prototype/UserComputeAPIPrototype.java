@@ -1,0 +1,62 @@
+package prototype;
+
+import api.UserComputeAPI;
+import api.UserJobRequest;
+import api.UserJobResponse;
+import project.annotations.NetworkAPIPrototype;
+
+/**
+ * Prototype implementation of UserComputeAPI.
+ * Does not run real logic — just accepts and returns a stubbed response.
+ */
+public class UserComputeAPIPrototype implements UserComputeAPI {
+
+    @Override
+    @NetworkAPIPrototype
+    public UserJobResponse submitJob(UserJobRequest request) {
+        // Always accept the job and return a fake jobId for now
+        return new ProtoUserJobResponse(true, "proto-123", "Prototype accepted");
+    }
+
+    /**
+     * Simple prototype version of a JobRequest.
+     */
+    public static class ProtoUserJobRequest implements UserJobRequest {
+        private final String inputSource;
+        private final String outputDestination;
+        private final Character pairSeparator;
+        private final Character kvSeparator;
+
+        public ProtoUserJobRequest(String inputSource, String outputDestination,
+                                   Character pairSeparator, Character kvSeparator) {
+            this.inputSource = inputSource;
+            this.outputDestination = outputDestination;
+            this.pairSeparator = pairSeparator;
+            this.kvSeparator = kvSeparator;
+        }
+
+        public String getInputSource() { return inputSource; }
+        public String getOutputDestination() { return outputDestination; }
+        public Character getPairSeparator() { return pairSeparator; }
+        public Character getKvSeparator() { return kvSeparator; }
+    }
+
+    /**
+     * Simple prototype version of a JobResponse.
+     */
+    public static class ProtoUserJobResponse implements UserJobResponse {
+        private final boolean accepted;
+        private final String jobId;
+        private final String message;
+
+        public ProtoUserJobResponse(boolean accepted, String jobId, String message) {
+            this.accepted = accepted;
+            this.jobId = jobId;
+            this.message = message;
+        }
+
+        public boolean isAccepted() { return accepted; }
+        public String getJobId() { return jobId; }
+        public String getMessage() { return message; }
+    }
+}
