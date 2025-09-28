@@ -3,13 +3,16 @@ package examples;
 import network.api.UserComputeAPI;
 import network.api.UserJobRequest;
 import network.api.UserJobResponse;
+
 import network.impl.UserComputeAPIPrototype;
 import network.impl.ProtoUserJobRequest;
+
+import conceptual.impl.JobOrchestratorPrototype;    
+import conceptual.impl.NumberToWordsAPIPrototype;   
+import process.impl.StorageEngineAPIPrototype;      
+
 import shared.stuff.JobStatus;
 
-import conceptual.impl.JobOrchestratorPrototype;
-import conceptual.impl.NumberToWordsAPIPrototype;
-import process.impl.StorageEngineAPIPrototype;
 
 public class Checkpoint2DemoRun {
     public static void main(String[] args) throws Exception {
@@ -21,7 +24,7 @@ public class Checkpoint2DemoRun {
                 + " jobId=" + resp.getJobID()
                 + " message=" + resp.getMessage());
 
-        // Orchestrator demo (explicit types — no 'var')
+        // Orchestrator demo 
         StorageEngineAPIPrototype storage = new StorageEngineAPIPrototype();
         NumberToWordsAPIPrototype converter = new NumberToWordsAPIPrototype();
         JobOrchestratorPrototype orchestrator = new JobOrchestratorPrototype(storage, converter);
