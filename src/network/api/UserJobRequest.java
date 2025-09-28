@@ -1,4 +1,4 @@
-package api;
+package network.api;
 
 public interface UserJobRequest {
 	String getInputSource();        // Where to read input from (e.g., file path, DB)

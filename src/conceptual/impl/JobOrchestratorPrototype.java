@@ -1,14 +1,13 @@
-package prototype;
+package conceptual.impl;
 
-import api.NumberToWordsAPI;
-import api.StorageEngineAPI;
+import conceptual.api.NumberToWordsAPI;
+import process.api.StorageEngineAPI;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Prototype Job Orchestrator.
- * Uses StorageEngineAPI to read integers, calls NumberToWordsAPI to convert,
- * formats the results, and writes them back.
+ * Prototype orchestrator: read -> convert -> format -> write.
+ * Demonstrates how conceptual and process APIs work together.
  */
 public class JobOrchestratorPrototype {
 
@@ -20,7 +19,11 @@ public class JobOrchestratorPrototype {
         this.converter = converter;
     }
 
-    // Returns something like "6:six;12:twelve;21:twenty-one"
+    /**
+     * Runs the job and returns a single formatted string like:
+     *   "6:six;12:twelve;21:twenty-one"
+     * Defaults: pairSep=';' and kvSep=':' when null is passed.
+     */
     public String run(String inputSource, String outputDest, Character pairSep, Character kvSep) throws Exception {
         char p = (pairSep == null) ? ';' : pairSep.charValue();
         char k = (kvSep == null) ? ':' : kvSep.charValue();
@@ -32,7 +35,7 @@ public class JobOrchestratorPrototype {
         boolean first = true;
         for (Integer n : ints) {
             if (!first) {
-                sb.append(p);              
+                sb.append(p);
             }
             first = false;
 

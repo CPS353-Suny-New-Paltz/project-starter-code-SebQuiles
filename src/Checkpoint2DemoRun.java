@@ -1,6 +1,6 @@
-import prototype.JobOrchestratorPrototype;
-import prototype.StorageEngineAPIPrototype;
-import prototype.NumberToWordsAPIPrototype;
+import conceptual.imp.JobOrchestratorPrototype;
+import conceptual.imp.NumberToWordsAPIPrototype;
+import process.imp.StorageEngineAPIPrototype;
 
 public class Checkpoint2DemoRun {
     public static void main(String[] args) throws Exception {

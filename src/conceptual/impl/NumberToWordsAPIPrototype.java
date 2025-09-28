@@ -1,18 +1,17 @@
-package prototype;
+package conceptual.impl;
 
-import api.NumberToWordsAPI;
+import conceptual.api.NumberToWordsAPI;
 import project.annotations.ConceptualAPIPrototype;
 
 /**
- * Prototype implementation of NumberToWordsAPI.
- * Returns hard-coded words for a few integers, otherwise returns "prototype-number".
+ * Prototype converter: returns hard-coded values for demo.
+ * This is intentionally NOT the full algorithm for Checkpoint 2.
  */
 public class NumberToWordsAPIPrototype implements NumberToWordsAPI {
 
     @Override
     @ConceptualAPIPrototype
     public String toWords(int n) {
-        // Simple stubbed logic, not a full converter yet
         if (n == 6) {
             return "six";
         }
@@ -22,6 +21,6 @@ public class NumberToWordsAPIPrototype implements NumberToWordsAPI {
         if (n == 21) {
             return "twenty-one";
         }
-        return "prototype-number"; // default placeholder
+        return "prototype-number";
     }
 }
