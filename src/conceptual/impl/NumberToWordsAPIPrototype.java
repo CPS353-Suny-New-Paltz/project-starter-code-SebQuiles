@@ -10,7 +10,6 @@ import project.annotations.ConceptualAPIPrototype;
 public class NumberToWordsAPIPrototype implements NumberToWordsAPI {
 
     @Override
-    @ConceptualAPIPrototype
     public String toWords(int n) {
         if (n == 6) {
             return "six";
@@ -22,5 +21,10 @@ public class NumberToWordsAPIPrototype implements NumberToWordsAPI {
             return "twenty-one";
         }
         return "prototype-number";
+    }
+    
+    @ConceptualAPIPrototype
+    public void ConceptualApiPrototype (NumberToWordsAPI numberToWords) {
+    	String word = numberToWords.toWords(12); 
     }
 }

@@ -1,18 +1,16 @@
-package network.impl;
-
-import network.api.UserJobRequest;
+package network.api;
 
 /**
  * Prototype DTO implementation for UserJobRequest.
  */
-public class ProtoUserJobRequest implements UserJobRequest {
+public class UserJobRequestPrototype implements UserJobRequest {
 
     private final String inputSource;
     private final String outputDestination;
     private final Character pairSeparator;
     private final Character kvSeparator;
-
-    public ProtoUserJobRequest(String inputSource, String outputDestination,
+    
+    public UserJobRequestPrototype(String inputSource, String outputDestination,
                                Character pairSeparator, Character kvSeparator) {
         this.inputSource = inputSource;
         this.outputDestination = outputDestination;

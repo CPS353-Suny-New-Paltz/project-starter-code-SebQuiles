@@ -1,15 +1,13 @@
 package examples;
 
+import network.api.UserJobRequestPrototype;
 import network.api.UserComputeAPI;
+import network.api.UserComputeAPIPrototype;
 import network.api.UserJobRequest;
 import network.api.UserJobResponse;
-
-import network.impl.UserComputeAPIPrototype;
-import network.impl.ProtoUserJobRequest;
-
 import conceptual.impl.JobOrchestratorPrototype;    
 import conceptual.impl.NumberToWordsAPIPrototype;   
-import process.impl.StorageEngineAPIPrototype;      
+import process.api.StorageEngineAPIPrototype;      
 
 import shared.stuff.JobStatus;
 
@@ -18,7 +16,7 @@ public class Checkpoint2DemoRun {
     public static void main(String[] args) throws Exception {
         // Network API demo
         UserComputeAPI api = new UserComputeAPIPrototype();
-        UserJobRequest req = new ProtoUserJobRequest("file://fake-input", "file://fake-output", ';', ':');
+        UserJobRequest req = new UserJobRequestPrototype("file://fake-input", "file://fake-output", ';', ':');
         UserJobResponse resp = api.submitJob(req);
         System.out.println("submitJob: status=" + resp.getStatus()
                 + " jobId=" + resp.getJobID()
