@@ -7,6 +7,7 @@ import network.api.UserJobRequest;
 import network.api.UserJobResponse;
 import conceptual.impl.JobOrchestratorPrototype;    
 import conceptual.impl.NumberToWordsAPIPrototype;   
+import process.api.StorageEngineAPI;
 import process.api.StorageEngineAPIPrototype;      
 
 import shared.stuff.JobStatus;
@@ -23,7 +24,7 @@ public class Checkpoint2DemoRun {
                 + " message=" + resp.getMessage());
 
         // Orchestrator demo 
-        StorageEngineAPIPrototype storage = new StorageEngineAPIPrototype();
+        StorageEngineAPI storage = new StorageEngineAPIPrototype();
         NumberToWordsAPIPrototype converter = new NumberToWordsAPIPrototype();
         JobOrchestratorPrototype orchestrator = new JobOrchestratorPrototype(storage, converter);
 
