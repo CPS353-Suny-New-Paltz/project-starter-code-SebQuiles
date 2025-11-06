@@ -8,7 +8,6 @@ import java.util.List;
  */
 @ProcessAPI
 public interface StorageEngineAPI {
-    List<Integer> readIntegers(String inputSourceId);
-    List<String> writeResults(String outputDestinationId, List<String> pairs);
+    List<Integer> readIntegers(String inputSourceId) throws Exception;
+    void writeResults(String outputDestinationId, List<String> formattedPairs) throws Exception;
 }
-
