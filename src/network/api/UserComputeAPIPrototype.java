@@ -16,11 +16,4 @@ public class UserComputeAPIPrototype implements UserComputeAPI {
             "Prototype accepted"
         );
     }
-    @NetworkAPIPrototype
-    public void networkAPIPrototype(UserComputeAPI api) {
-        UserJobRequest req = new UserJobRequest(/* minimal valid args */);
-        UserJobResponse resp = api.submitJob(req);
-        
-    }
-}
 }

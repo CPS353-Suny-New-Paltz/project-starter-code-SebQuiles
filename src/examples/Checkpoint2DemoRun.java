@@ -8,7 +8,7 @@ import network.api.UserJobResponse;
 import conceptual.impl.JobOrchestratorPrototype;    
 import conceptual.impl.NumberToWordsAPIPrototype;   
 import process.api.StorageEngineAPI;
-import process.api.StorageEngineAPIPrototype;      
+import process.impl.StorageEngineAPIPrototype;      
 
 import shared.stuff.JobStatus;
 
