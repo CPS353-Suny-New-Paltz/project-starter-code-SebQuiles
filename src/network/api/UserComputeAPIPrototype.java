@@ -1,6 +1,5 @@
 package network.api;
 
-import project.annotations.NetworkAPIPrototype;
 import shared.stuff.JobStatus;
 /**
  * Prototype Network API: always accepts and returns a stubbed response.
