@@ -1,8 +1,5 @@
 package network.api;
 
-import project.annotations.NetworkAPI;
-
-@NetworkAPI
 public interface UserJobRequest {
 	String getInputSource();        // Where to read input from (e.g., file path, DB)
     String getOutputDestination();  // Where to write the results (e.g., file path, DB)
