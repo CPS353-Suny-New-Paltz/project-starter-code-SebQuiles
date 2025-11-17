@@ -6,13 +6,13 @@ import shared.stuff.JobStatus;
 /**
  * Prototype DTO implementation for UserJobResponse.
  */
-public class ProtoUserJobResponse implements UserJobResponse {
+public class UserJobResponsePrototype implements UserJobResponse {
 
     private final JobStatus status;
     private final String jobId;
     private final String message;
-
-    public ProtoUserJobResponse(JobStatus status, String jobId, String message) {
+    
+    public UserJobResponsePrototype(JobStatus status, String jobId, String message) {
         this.status = status;
         this.jobId = jobId;
         this.message = message;

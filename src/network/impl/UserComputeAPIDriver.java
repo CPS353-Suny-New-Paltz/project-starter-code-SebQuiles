@@ -1,5 +1,5 @@
-// src/.../conceptual/impl/UserComputeAPIDriver.java
-package conceptual.impl;
+// src/.../network/impl/UserComputeAPIDriver.java
+package network.impl;
 
 import network.api.UserComputeAPI;
 import network.api.UserJobRequest;
