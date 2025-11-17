@@ -1,5 +1,6 @@
-package network.api;
+package network.impl;
 
+import network.api.UserJobResponse;
 import shared.stuff.JobStatus;
 
 /**

@@ -1,4 +1,6 @@
-package network.api;
+package network.impl;
+
+import network.api.UserJobRequest;
 
 /**
  * Prototype DTO implementation for UserJobRequest.
