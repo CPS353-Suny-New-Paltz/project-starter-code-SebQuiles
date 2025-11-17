@@ -1,22 +1,28 @@
 package examples;
 
-import network.api.UserJobRequestPrototype;
 import network.api.UserComputeAPI;
-import network.api.UserComputeAPIPrototype;
 import network.api.UserJobRequest;
 import network.api.UserJobResponse;
+import network.impl.UserComputeAPIImpl;
+import network.impl.UserJobRequestPrototype;
+import conceptual.api.NumberToWordsAPI;
 import conceptual.impl.JobOrchestratorPrototype;    
-import conceptual.impl.NumberToWordsAPIPrototype;   
+import conceptual.impl.NumberToWordsAPIImpl;   
 import process.api.StorageEngineAPI;
-import process.impl.StorageEngineAPIPrototype;      
+import process.impl.StorageEngineAPIImpl;      
 
 import shared.stuff.JobStatus;
 
 
 public class Checkpoint2DemoRun {
     public static void main(String[] args) throws Exception {
-        // Network API demo
-        UserComputeAPI api = new UserComputeAPIPrototype();
+        
+    	//Build dependencies for Network API and Orchestrator
+    	StorageEngineAPI storage = new StorageEngineAPIImpl();
+    	NumberToWordsAPI converter = new NumberToWordsAPIImpl();
+    	
+    	// Network API demo
+    	UserComputeAPI api = new UserComputeAPIImpl(storage, converter); 
         UserJobRequest req = new UserJobRequestPrototype("file://fake-input", "file://fake-output", ';', ':');
         UserJobResponse resp = api.submitJob(req);
         System.out.println("submitJob: status=" + resp.getStatus()
@@ -24,8 +30,6 @@ public class Checkpoint2DemoRun {
                 + " message=" + resp.getMessage());
 
         // Orchestrator demo 
-        StorageEngineAPI storage = new StorageEngineAPIPrototype();
-        NumberToWordsAPIPrototype converter = new NumberToWordsAPIPrototype();
         JobOrchestratorPrototype orchestrator = new JobOrchestratorPrototype(storage, converter);
 
         String out = orchestrator.run("file://fake-input", "file://fake-output", ';', ':');
