@@ -33,11 +33,17 @@ test {
     // By default exclude tests tagged with 'smoke' so failing smoke tests won't block CI/PR merges.
     // To include smoke tests, run Gradle with `-PrunSmoke=true`.
     def includeSmoke = project.hasProperty('runSmoke') && project.property('runSmoke') == 'true'
+    // By default exclude expensive integration tests; to run them use `-PrunIntegration=true`.
+    def runIntegration = project.hasProperty('runIntegration') && project.property('runIntegration') == 'true'
     useJUnitPlatform {
         if (includeSmoke) {
             includeTags 'smoke'
         } else {
             excludeTags 'smoke'
+        }
+        if (!runIntegration) {
+            // exclude any tests annotated with @Tag("integration") unless explicitly requested
+            excludeTags 'integration'
         }
     }
 }
