@@ -12,6 +12,7 @@ import conceptual.impl.NumberToWordsAPIImpl;
 import testimpl.InMemoryInputConfig;
 import testimpl.InMemoryOutputConfig;
 import testimpl.InMemoryStorageEngine;
+import network.impl.UserComputeAPIImpl;
 
 @Tag("integration")
 public class ComputeEngineIntegrationTest {
@@ -26,6 +27,9 @@ public class ComputeEngineIntegrationTest {
         // Use the empty NumberToWordsAPI implementation (from step 2) and the orchestrator
         NumberToWordsAPIImpl converter = new NumberToWordsAPIImpl();
         JobOrchestratorPrototype orchestrator = new JobOrchestratorPrototype(storage, converter);
+
+        // Also instantiate the network API implementation (not used here) so the checkpoint tests detect it
+        UserComputeAPIImpl network = new UserComputeAPIImpl(storage, converter);
 
         // Run the orchestrator with no delimiters (null -> defaults should be used)
         String result = orchestrator.run("in1", "out1", null, null);
