@@ -1,7 +1,6 @@
 package conceptual.impl;
 
 import conceptual.api.NumberToWordsAPI;
-import project.annotations.ConceptualAPIPrototype;
 
 /**
  * Number -> Words converter (Conceptual layer).
@@ -65,6 +64,18 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
         number %= 1_000L;
 
         // last chunk (0..999)
+    private String convertPositiveNumber(long number) {
+        StringBuilder result = new StringBuilder();
+
+        appendScale(result, (int) (number / 1_000_000_000L), "billion");
+        number %= 1_000_000_000L;
+
+        appendScale(result, (int) (number / 1_000_000L), "million");
+        number %= 1_000_000L;
+
+        appendScale(result, (int) (number / 1_000L), "thousand");
+        number %= 1_000L;
+
         if (number > 0) {
             appendWithSpace(result, convertUnderThousand((int) number));
         }
@@ -86,6 +97,17 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
      */
     private void appendWithSpace(StringBuilder builder, String text) {
         if (text == null || text.isBlank()) return;
+    private void appendScale(StringBuilder out, int chunk, String scaleWord) {
+        if (chunk <= 0) {
+            return;
+        }
+        appendWithSpace(out, convertUnderThousand(chunk) + " " + scaleWord);
+    }
+
+    private void appendWithSpace(StringBuilder builder, String text) {
+        if (text == null || text.isBlank()) {
+            return;
+        }
 
         if (builder.length() > 0) {
             builder.append(' ');
@@ -102,6 +124,10 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
      */
     private String convertUnderThousand(int number) {
         if (number <= 0) return "";
+    private String convertUnderThousand(int number) {
+        if (number <= 0) {
+            return "";
+        }
 
         if (number < 100) {
             return convertUnderHundred(number);

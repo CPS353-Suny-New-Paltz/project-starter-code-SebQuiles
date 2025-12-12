@@ -51,9 +51,14 @@ public class UserComputeAPIImpl implements UserComputeAPI {
             List<String> pairs = new ArrayList<>();
             for (Integer value : inputs) {
                 if (value == null) continue;
+                if (value == null) {
+                    continue;
+                }
+
                 String words = converter.toWords(value);
                 pairs.add(value + String.valueOf(kvSep) + words);
             }
+
 
             // 3) Join into ONE line (this is what the test expects)
             String oneLine = String.join(String.valueOf(pairSep), pairs);
