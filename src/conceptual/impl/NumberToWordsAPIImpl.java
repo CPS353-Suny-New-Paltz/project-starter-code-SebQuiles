@@ -11,8 +11,8 @@ import conceptual.api.NumberToWordsAPI;
  * - supports up to billions (fits int range)
  *
  * Formatting:
- * - uses spaces between groups
- * - uses hyphens for 21-99 when needed (ex: "twenty-five")
+ * - spaces between groups
+ * - hyphens for 21-99 when needed (ex: "twenty-five")
  */
 public class NumberToWordsAPIImpl implements NumberToWordsAPI {
 
@@ -34,7 +34,7 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
             return "zero";
         }
 
-        long value = n;
+        long value = n; // prevents overflow for Integer.MIN_VALUE
         if (value < 0) {
             return "minus " + convertPositiveNumber(-value);
         }
