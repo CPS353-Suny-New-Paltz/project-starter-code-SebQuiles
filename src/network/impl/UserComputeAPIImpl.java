@@ -50,7 +50,6 @@ public class UserComputeAPIImpl implements UserComputeAPI {
             // 2) Convert + format into key=value pairs
             List<String> pairs = new ArrayList<>();
             for (Integer value : inputs) {
-                if (value == null) continue;
                 if (value == null) {
                     continue;
                 }
