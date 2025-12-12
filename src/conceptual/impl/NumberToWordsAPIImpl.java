@@ -11,12 +11,11 @@ import conceptual.api.NumberToWordsAPI;
  * - supports up to billions (fits int range)
  *
  * Formatting:
- * - uses spaces between groups
- * - uses hyphens for 21-99 when needed (ex: "twenty-five")
+ * - spaces between groups
+ * - hyphens for 21-99 when needed (ex: "twenty-five")
  */
 public class NumberToWordsAPIImpl implements NumberToWordsAPI {
 
-    // quick lookups so we don't hardcode a million if/else statements
     private static final String[] UNITS_0_TO_19 = {
             "zero", "one", "two", "three", "four",
             "five", "six", "seven", "eight", "nine",
@@ -24,7 +23,6 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
             "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
     };
 
-    // index is the tens digit (2 => twenty, 3 => thirty, etc.)
     private static final String[] TENS_20_TO_90 = {
             "", "", "twenty", "thirty", "forty",
             "fifty", "sixty", "seventy", "eighty", "ninety"
@@ -36,8 +34,7 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
             return "zero";
         }
 
-        // use long so Integer.MIN_VALUE doesn't break when we negate it
-        long value = n;
+        long value = n; // prevents overflow for Integer.MIN_VALUE
         if (value < 0) {
             return "minus " + convertPositiveNumber(-value);
         }
@@ -45,25 +42,6 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
         return convertPositiveNumber(value);
     }
 
-    /**
-     * Converts a positive number (long), split into: billions, millions, thousands, remainder.
-     */
-    private String convertPositiveNumber(long number) {
-        StringBuilder result = new StringBuilder();
-
-        // billions
-        appendScale(result, (int) (number / 1_000_000_000L), "billion");
-        number %= 1_000_000_000L;
-
-        // millions
-        appendScale(result, (int) (number / 1_000_000L), "million");
-        number %= 1_000_000L;
-
-        // thousands
-        appendScale(result, (int) (number / 1_000L), "thousand");
-        number %= 1_000L;
-
-        // last chunk (0..999)
     private String convertPositiveNumber(long number) {
         StringBuilder result = new StringBuilder();
 
@@ -83,20 +61,6 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
         return result.toString();
     }
 
-    /**
-     * Adds "<chunk in words> <scaleWord>" to the output if chunk > 0.
-     * Example: chunk=12, scaleWord="thousand" => "twelve thousand"
-     */
-    private void appendScale(StringBuilder out, int chunk, String scaleWord) {
-        if (chunk <= 0) return;
-        appendWithSpace(out, convertUnderThousand(chunk) + " " + scaleWord);
-    }
-
-    /**
-     * Appends text with exactly one space if the builder already has content.
-     */
-    private void appendWithSpace(StringBuilder builder, String text) {
-        if (text == null || text.isBlank()) return;
     private void appendScale(StringBuilder out, int chunk, String scaleWord) {
         if (chunk <= 0) {
             return;
@@ -115,15 +79,6 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
         builder.append(text);
     }
 
-    /**
-     * Converts 1..999 into words.
-     * Examples:
-     * - 7 => "seven"
-     * - 42 => "forty-two"
-     * - 305 => "three hundred five"
-     */
-    private String convertUnderThousand(int number) {
-        if (number <= 0) return "";
     private String convertUnderThousand(int number) {
         if (number <= 0) {
             return "";
@@ -143,11 +98,6 @@ public class NumberToWordsAPIImpl implements NumberToWordsAPI {
         return base + " " + convertUnderHundred(remainder);
     }
 
-    /**
-     * Converts 1..99 into words.
-     * - 1..19 is direct lookup
-     * - 20..99 uses tens + optional "-unit"
-     */
     private String convertUnderHundred(int number) {
         if (number < 20) {
             return UNITS_0_TO_19[number];
