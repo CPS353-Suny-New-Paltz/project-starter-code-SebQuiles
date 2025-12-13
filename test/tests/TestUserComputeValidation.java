@@ -38,8 +38,7 @@ public class TestUserComputeValidation {
 
         UserComputeAPIImpl api = new UserComputeAPIImpl(storage, converter);
 
-        UserJobRequest req = new UserJobRequest()
-        {
+        UserJobRequest req = new UserJobRequest(){
             @Override
             public String getInputSource(){
                 return "   ";

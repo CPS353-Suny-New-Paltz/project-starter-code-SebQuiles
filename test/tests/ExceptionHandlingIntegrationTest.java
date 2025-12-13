@@ -33,8 +33,7 @@ public class ExceptionHandlingIntegrationTest {
         // and by boundary design it does not throw.
         Path outputDir = Files.createTempDirectory("cp5-output-dir");
 
-        UserJobRequest request = new UserJobRequest()
-        {
+        UserJobRequest request = new UserJobRequest(){
             @Override
             public String getInputSource(){
                 return inputFile.toString();
