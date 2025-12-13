@@ -36,26 +36,22 @@ public class ExceptionHandlingIntegrationTest {
         UserJobRequest request = new UserJobRequest()
         {
             @Override
-            public String getInputSource()
-            {
+            public String getInputSource(){
                 return inputFile.toString();
             }
 
             @Override
-            public String getOutputDestination()
-            {
+            public String getOutputDestination(){
                 return outputDir.toString();
             }
 
             @Override
-            public Character getPairSeparator()
-            {
+            public Character getPairSeparator(){
                 return ',';
             }
 
             @Override
-            public Character getKvSeparator()
-            {
+            public Character getKvSeparator(){
                 return '=';
             }
         };
