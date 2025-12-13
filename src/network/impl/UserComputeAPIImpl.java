@@ -17,28 +17,38 @@ public class UserComputeAPIImpl implements UserComputeAPI {
     private final NumberToWordsAPI converter;
 
     public UserComputeAPIImpl(StorageEngineAPI storage, NumberToWordsAPI converter) {
+        if (storage == null) {
+            throw new IllegalArgumentException("storage must not be null");
+        }
+        if (converter == null) {
+            throw new IllegalArgumentException("converter must not be null");
+        }
         this.storage = storage;
         this.converter = converter;
     }
 
     @Override
     public UserJobResponse submitJob(UserJobRequest request) {
-        // Keep this simple: test doesn't check status, it checks the file output.
+        // Boundary rule (Checkpoint 5): no exceptions should escape this method.
+
         if (request == null) {
-            return new UserJobResponsePrototype(JobStatus.ACCEPTED, null, "Request was null");
+            return new UserJobResponsePrototype(JobStatus.REJECTED, null, "request must not be null");
         }
 
         String inputSource = request.getInputSource();
         String outputDestination = request.getOutputDestination();
 
-        if (inputSource == null || inputSource.isBlank() || outputDestination == null || outputDestination.isBlank()) {
-            return new UserJobResponsePrototype(JobStatus.ACCEPTED, null, "Missing input/output path");
+        if (inputSource == null || inputSource.isBlank()) {
+            return new UserJobResponsePrototype(JobStatus.REJECTED, null, "inputSource must not be blank");
+        }
+        if (outputDestination == null || outputDestination.isBlank()) {
+            return new UserJobResponsePrototype(JobStatus.REJECTED, null, "outputDestination must not be blank");
         }
 
-        // For Checkpoint4TestSuite: MUST be comma-separated.
+        // For Checkpoint4TestSuite: MUST be comma-separated by default.
         char pairSep = (request.getPairSeparator() != null) ? request.getPairSeparator() : ',';
 
-        // Your README examples use '=' (the interface comment says ':' but README shows '=')
+        // README examples use '=' mostly, so default to that too. may change later.
         char kvSep = (request.getKvSeparator() != null) ? request.getKvSeparator() : '=';
 
         String jobId = UUID.randomUUID().toString();
@@ -58,16 +68,25 @@ public class UserComputeAPIImpl implements UserComputeAPI {
                 pairs.add(value + String.valueOf(kvSep) + words);
             }
 
-
-            // 3) Join into ONE line (this is what the test expects)
+            // 3) Join into ONE line (Checkpoint 4 expects a single comma-separated line)
             String oneLine = String.join(String.valueOf(pairSep), pairs);
 
             // 4) Write exactly ONE line
             storage.writeResults(outputDestination, List.of(oneLine));
 
-            return new UserJobResponsePrototype(JobStatus.ACCEPTED, jobId, "Wrote " + pairs.size() + " result(s)");
-        } catch (Exception e) {
-            return new UserJobResponsePrototype(JobStatus.ACCEPTED, jobId, "Job failed: " + e.getMessage());
+            return new UserJobResponsePrototype(
+                    JobStatus.ACCEPTED,
+                    jobId,
+                    "Wrote " + pairs.size() + " result(s)"
+            );
+
+        } catch (Throwable t) {
+            // Translate any failure into an explicit FAILED response.
+            String msg = t.getMessage();
+            if (msg == null || msg.isBlank()) {
+                msg = t.getClass().getSimpleName();
+            }
+            return new UserJobResponsePrototype(JobStatus.FAILED, jobId, "Job failed: " + msg);
         }
     }
 }
