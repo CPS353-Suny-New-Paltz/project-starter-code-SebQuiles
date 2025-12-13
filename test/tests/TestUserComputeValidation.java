@@ -38,10 +38,18 @@ public class TestUserComputeValidation {
         UserComputeAPIImpl api = new UserComputeAPIImpl(storage, converter);
 
         UserJobRequest req = new UserJobRequest() {
-            @Override public String getInputSource() { return "   "; }
-            @Override public String getOutputDestination() { return "out.txt"; }
-            @Override public Character getPairSeparator() { return ','; }
-            @Override public Character getKvSeparator() { return '='; }
+            @Override public String getInputSource() { 
+                return "   "; 
+            }
+            @Override public String getOutputDestination() { 
+                return "out.txt"; 
+            }
+            @Override public Character getPairSeparator() { 
+                return ','; 
+            }
+            @Override public Character getKvSeparator() { 
+                return '='; 
+            }
         };
 
         UserJobResponse resp = api.submitJob(req);
@@ -55,12 +63,16 @@ public class TestUserComputeValidation {
         try {
             Method m = resp.getClass().getMethod("getStatus");
             return (JobStatus) m.invoke(resp);
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) { 
+              
+        }
 
         try {
             Method m = resp.getClass().getMethod("getJobStatus");
             return (JobStatus) m.invoke(resp);
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) { 
+
+        }
 
         fail("Could not find status getter on UserJobResponse (expected getStatus() or getJobStatus()).");
         return null; // unreachable
