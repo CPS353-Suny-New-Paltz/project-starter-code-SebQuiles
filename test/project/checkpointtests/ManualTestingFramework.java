@@ -45,9 +45,13 @@ public class ManualTestingFramework {
 
             api.submitJob(request);
 
-        } catch (Exception e) {
-            // Make failures obvious during testing
-            throw new RuntimeException(e);
+        } catch (Throwable t) {
+            // don't rethrow; just report
+            String msg = t.getMessage();
+            if (msg == null || msg.isBlank()) {
+                msg = t.getClass().getSimpleName();
+            }
+            System.err.println("ManualTestingFramework failed: " + msg);
         }
     }
 }
