@@ -38,7 +38,7 @@ public class MultiUserConcurrencyTest {
             exec.submit(() -> {
                 try {
                     startLatch.await();
-                    testHarness.TestUser user = new testHarness.TestUser(api);
+                    testharness.TestUser user = new testharness.TestUser(api);
                     user.run(out.getCanonicalPath());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -89,8 +89,8 @@ public class MultiUserConcurrencyTest {
         UserComputeAPI single = new network.impl.UserComputeAPIImpl(storage, converter);
         MultiThreadedUserComputeAPIImpl multi = new MultiThreadedUserComputeAPIImpl(storage, converter);
 
-        testHarness.TestUser singleUser = new testHarness.TestUser(single);
-        testHarness.TestUser multiUser = new testHarness.TestUser(multi);
+        testharness.TestUser singleUser = new testharness.TestUser(single);
+        testharness.TestUser multiUser = new testharness.TestUser(multi);
 
         long t1 = System.nanoTime();
         singleUser.run(singleOut.getCanonicalPath());
